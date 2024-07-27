@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import Search from './Search';
 
 const Home = () => {
   const [catData, getCatData] = useState([]);
@@ -57,7 +56,6 @@ const Home = () => {
 
   return (
     <div>
-      <Search catData={catData} />
       <h3>Favorites</h3>
       {favorites.map((image) => (
         <div>
