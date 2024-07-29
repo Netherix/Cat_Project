@@ -4,6 +4,15 @@ const Home = () => {
   const [catData, getCatData] = useState([]);
   const [selectedCat, setSelectedCat] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const CATS_PER_PAGE = 10;
+  const CAT_LENGTH = catData.length;
+  const MAX_PAGES = Math.ceil(CAT_LENGTH / CATS_PER_PAGE);
+  const lastCatIndex = CATS_PER_PAGE * currentPage;
+  const firstCatIndex = lastCatIndex - CATS_PER_PAGE;
+  const currentCatArray = catData.slice(firstCatIndex, lastCatIndex);
+  const pageNumbers = Array.from({ length: MAX_PAGES }, (v, i) => i + 1);
 
   useEffect(() => {
     const fetchData = async() => {
@@ -70,7 +79,7 @@ const Home = () => {
           </button>
         </div>
       ))}
-      {catData.map((cat) => (
+      {currentCatArray.map((cat) => (
         <div>
           <button onClick={() => handleClick(cat)}>
             {cat.name}
@@ -87,6 +96,15 @@ const Home = () => {
             Favorite
           </button>
         </div>
+      ))}
+      {pageNumbers.map((page) => (
+        <button
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          disabled = {page === currentPage}         
+        >
+          {page}
+        </button>
       ))}
     </div>
   )
