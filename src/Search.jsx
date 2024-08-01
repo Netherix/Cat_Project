@@ -33,7 +33,11 @@ const Search = ({ catData }) => {
       </form>
       {hasSearched && (
         searchResult ? (
-          <h3>Searched</h3>
+          <img 
+            src={`https://cdn2.thecatapi.com/images/${searchResult.reference_image_id}.jpg`}
+            alt={searchResult.name}
+            style={{ height:"300px", width: "300px" }}  
+          />
         ) : (
           <h3>Not Found</h3>
         )
